@@ -1,0 +1,56 @@
+#loginPane{
+	-fx-background-color: #f9dfd2;
+}
+
+#logo {
+    -fx-effect: dropshadow(gaussian, #888, 10, 0, 0, 0);
+   
+}
+
+#navBar{
+	-fx-background-color: #d2ecf9;
+	-fx-padding: 10px;
+}
+
+#loginLabel{
+	-fx-text-fill: #2C3E50;
+    -fx-font-size: 30px;
+}
+
+.loginSubLabel {
+    -fx-text-fill: #2C3E50;
+    -fx-font-size: 16px;
+    -fx-padding: 5px;
+}
+
+.loginButton {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-width: 2;
+    -fx-border-color: #2C3E50;
+    -fx-text-fill: #2C3E50;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+}
+
+.loginButton:hover {
+    -fx-background-color: #2C3E50;
+    -fx-text-fill: #FFFFFF;
+}
+
+.loginTextField {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-width: 2;
+    -fx-border-color: #2C3E50;
+    -fx-text-fill: #2C3E50;
+    -fx-font-size: 16px;
+    -fx-padding: 10px;
+}
+
+.loginTextField:hover {
+    -fx-background-color: #F1F1F1;
+}
+
