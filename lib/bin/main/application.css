@@ -1,4 +1,4 @@
-#loginPane{
+#inputPane{
 	-fx-background-color: #f9dfd2;
 }
 
@@ -12,7 +12,7 @@
 	-fx-padding: 10px;
 }
 
-#loginLabel{
+.loginLabel{
 	-fx-text-fill: #2C3E50;
     -fx-font-size: 30px;
 }
@@ -23,18 +23,18 @@
     -fx-padding: 5px;
 }
 
-.loginButton {
+.button {
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
     -fx-border-width: 2;
     -fx-border-color: #2C3E50;
     -fx-text-fill: #2C3E50;
-    -fx-font-size: 16px;
+    -fx-font-size: 130%;
     -fx-padding: 10px 20px;
 }
 
-.loginButton:hover {
+.button:hover {
     -fx-background-color: #2C3E50;
     -fx-text-fill: #FFFFFF;
 }
