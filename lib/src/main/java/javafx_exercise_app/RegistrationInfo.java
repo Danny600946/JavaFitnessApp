@@ -77,17 +77,18 @@ public class RegistrationInfo extends UserInfo {
 		}
 
 		for (int i = 0; i < email.length(); i++) {
+			if (i + 1 < email.length()) {
+				if ((email.charAt(i) == '-') && (email.charAt(i + 1) == '-')) {
+					invalidEmail = true;
+				}
 
-			if ((email.charAt(i) == '-') && (email.charAt(i + 1) == '-')) {
-				invalidEmail = true;
-			}
+				if ((email.charAt(i) == '_') && (email.charAt(i + 1) == '_')) {
+					invalidEmail = true;
+				}
 
-			if ((email.charAt(i) == '_') && (email.charAt(i + 1) == '_')) {
-				invalidEmail = true;
-			}
-
-			if ((email.charAt(i) == '.') && (email.charAt(i + 1) == '.')) {
-				invalidEmail = true;
+				if ((email.charAt(i) == '.') && (email.charAt(i + 1) == '.')) {
+					invalidEmail = true;
+				}
 			}
 
 			if (((email.charAt(i) == '@') && (i != 0))) {
