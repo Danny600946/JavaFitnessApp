@@ -60,6 +60,11 @@ public class RegistrationInfo extends UserInfo {
 
 	}
 
+	/**
+	 * Validates the users email address against requirements.
+	 * 
+	 * @return validationMessagesEmail List of the error messages.
+	 */
 	public List<String> validateEmail() {
 		validationMessagesEmail.clear();
 		boolean invalidEmail = false;
