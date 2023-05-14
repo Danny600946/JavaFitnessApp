@@ -172,4 +172,13 @@ public class RegistrationInfo extends UserInfo {
 		return validationMessagesEmail;
 	}
 
+	/**
+	 * Get method for the registration email.
+	 * 
+	 * @return email The users email in String format.
+	 */
+	protected String getEmail() {
+		return email;
+	}
+
 }
