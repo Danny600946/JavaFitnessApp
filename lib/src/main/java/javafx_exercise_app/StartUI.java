@@ -23,16 +23,16 @@ public abstract class StartUI {
 	protected static BorderPane navBar = new BorderPane();
 	protected static GridPane inputPane = new GridPane();
 	protected static Scene loginScene = new Scene(topPane);
-	
+
 	protected static Label usernameLabel = new Label("Username");
 	protected static Label passwordLabel = new Label("Password");
-	
+
 	protected static TextField usernameTextField = new TextField();
 	protected static PasswordField passwordField = new PasswordField();
 	// Logo Image.
 	protected static Image getFitImage = new Image("GetFitLogo.png");
 	protected static ImageView logo = new ImageView(getFitImage);
-	
+
 	protected static Node centerGridPaneNode(Node node) {
 		GridPane.setHalignment(node, HPos.CENTER);
 		GridPane.setValignment(node, VPos.CENTER);
