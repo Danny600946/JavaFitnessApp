@@ -75,8 +75,6 @@ public class SignUpUI extends StartUI {
 					& newUser.validateEmail().size() == 0) {
 				// Re-formats the input pane.
 				formatInputPane();
-				// Adds a confirmation message below register button.
-				inputPane.add(centerGridPaneNode(new Label("Registration Successful")), 0, 12);
 				// Still needs to send to db.
 				try {
 					Database.insertNewUser(newUser);
@@ -165,6 +163,11 @@ public class SignUpUI extends StartUI {
 		inputPane.add(centerGridPaneNode(registerButton), 0, 11);
 		// Centres the GridPane.
 		inputPane.setAlignment(Pos.CENTER);
+	}
+
+	public static void addRegistrationConfirmationMessage() {
+		// Adds a confirmation message below register button.
+		inputPane.add(centerGridPaneNode(new Label("Registration Successful")), 0, 12);
 	}
 
 }
