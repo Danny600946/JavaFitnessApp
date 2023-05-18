@@ -9,6 +9,9 @@ public class Database {
 
 	private static Connection conn = null;
 
+	/*
+	 * Establishes a connection to the db if it can be found.
+	 */
 	public static void connect() {
 
 		try {
@@ -24,6 +27,9 @@ public class Database {
 		}
 	}
 
+	/*
+	 * Closes the connection to the db if it is open.
+	 */
 	public static void closeConnection() {
 
 		try {
@@ -38,9 +44,15 @@ public class Database {
 
 	}
 
+	/**
+	 * 
+	 * @param userDetails Object containing the users registration details.
+	 * @throws SQLException Throws the exception if the db cannot be connected to
+	 */
 	public static void insertNewUser(RegistrationInfo userDetails) throws SQLException {
-		String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
 		connect();
+		// Creates the SQL string and adds the necessary details/
+		String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, userDetails.getUsername());
 		statement.setString(2, userDetails.getPassword());
@@ -48,12 +60,15 @@ public class Database {
 
 		try {
 			statement.executeUpdate();
+			// Displays message if no unique error is thrown.
+			SignUpUI.addRegistrationConfirmationMessage();
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 
 		} finally {
 			statement.close();
+			// Closes connection to db.
 			closeConnection();
 		}
 	}
