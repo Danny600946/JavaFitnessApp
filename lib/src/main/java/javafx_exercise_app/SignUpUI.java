@@ -75,7 +75,7 @@ public class SignUpUI extends StartUI {
 					& newUser.validateEmail().size() == 0) {
 				// Re-formats the input pane.
 				formatInputPane();
-				// Still needs to send to db.
+				// Attempts to add the new user to the database.
 				try {
 					Database.insertNewUser(newUser);
 				} catch (SQLException e) {
@@ -99,7 +99,6 @@ public class SignUpUI extends StartUI {
 				int i = 0;
 				while (i < newUser.getUsernameMessageList().size()) {
 					inputPane.add(centerGridPaneNode(new Label(newUser.getUsernameMessageList().get(i))), 0, 4 + i);
-					System.out.println(i);
 					i++;
 				}
 
@@ -165,6 +164,10 @@ public class SignUpUI extends StartUI {
 		inputPane.setAlignment(Pos.CENTER);
 	}
 
+	/*
+	 * Method to be used in the Database Class to add the confirmation message if no
+	 * exception is thrown when communicating with the db.
+	 */
 	public static void addRegistrationConfirmationMessage() {
 		// Adds a confirmation message below register button.
 		inputPane.add(centerGridPaneNode(new Label("Registration Successful")), 0, 12);
