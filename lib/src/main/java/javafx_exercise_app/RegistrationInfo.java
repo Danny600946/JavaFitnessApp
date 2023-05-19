@@ -27,7 +27,7 @@ public class RegistrationInfo extends UserInfo {
 			validationMessagesUsername.add("Must have more than 5 characters.");
 		}
 		// Checks that username does not contain any illegal characters.
-		if (getUsername().matches(".*[@#$%^&+= ].*")) {
+		if (getUsername().matches(".*[@#$%^&+= ].*") || getUsername().equals("")) {
 			validationMessagesUsername.add("No special characters or spaces.");
 		}
 
@@ -43,12 +43,9 @@ public class RegistrationInfo extends UserInfo {
 	 */
 	public List<String> validatePassword() {
 		boolean containsACapitalLetter;
-		// Input is empty.
-		if (getPassword().equals("")) {
-			validationMessagesPassword.add("Should not contain spaces.");
-		}
-		// Input contains a space.
-		if (getPassword().contains(" ")) {
+
+		// Input contains a space or is empty.
+		if (getPassword().contains(" ") || getPassword().equals("")) {
 			validationMessagesPassword.add("Should not contain spaces.");
 		}
 		// Input doesn't contain a number.
