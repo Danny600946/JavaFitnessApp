@@ -3,7 +3,9 @@ package javafx_exercise_app;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Database {
 
@@ -51,7 +53,7 @@ public class Database {
 	 */
 	public static void insertNewUser(RegistrationInfo userDetails) throws SQLException {
 		connect();
-		// Creates the SQL string and adds the necessary details/
+		// Creates the SQL string and adds the necessary details.
 		String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, userDetails.getUsername());
@@ -64,7 +66,23 @@ public class Database {
 			SignUpUI.addRegistrationConfirmationMessage();
 
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			String typeOfConstraintViolation = e.getMessage();
+
+			if (typeOfConstraintViolation.contains("users.username")) {
+				System.out.println("Username Already Exists");
+				// Display the error message to the user.
+			}
+
+			if (typeOfConstraintViolation.contains("users.email")) {
+				System.out.println("Email Already Exists");
+				// Display the error message to the user.
+				String username = userDetails.getUsername();
+				if (hasMatchInColumn(username)) {
+					System.out.println("The username is also not unique");
+					// Display the error message to the user.
+				}
+
+			}
 
 		} finally {
 			statement.close();
@@ -72,4 +90,35 @@ public class Database {
 			closeConnection();
 		}
 	}
+
+	private static ResultSet getUsernameColumn() throws SQLException {
+		String usernameColQuery = "SELECT username FROM users";
+		Statement statement = conn.createStatement();
+		ResultSet allUsernamesInDatabase = null;
+
+		try {
+			allUsernamesInDatabase = statement.executeQuery(usernameColQuery);
+		} catch (SQLException e) {
+			System.out.println("Query could  not be executed");
+		}
+
+		return allUsernamesInDatabase;
+
+	}
+
+	private static boolean hasMatchInColumn(String username) throws SQLException {
+
+		ResultSet usernamesInDatabase = getUsernameColumn();
+		boolean matchFound = false;
+
+		while (!matchFound && usernamesInDatabase.next()) {
+			String value = usernamesInDatabase.getString("username");
+
+			if (username.equals(value)) {
+				matchFound = true;
+			}
+		}
+		return matchFound;
+	}
+
 }
