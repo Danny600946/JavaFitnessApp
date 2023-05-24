@@ -54,3 +54,17 @@
     -fx-background-color: #F1F1F1;
 }
 
+#registrationSuccessLabel{
+    -fx-text-fill: #2E7D32; /* Dark green text color */
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.takenLabels {
+	-fx-text-fill: #FF0000; /* Red text color */
+	-fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
