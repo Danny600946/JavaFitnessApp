@@ -14,6 +14,9 @@ public class SignUpUI extends StartUI {
 
 	private static Label registerLabel = new Label("Register");
 	private static Label emailLabel = new Label("E-Mail");
+	private static Label registrationSuccessLabel = new Label("Registration Successful");
+	private static Label usernameTakenLabel = new Label("Username Taken");
+	private static Label emailUsedLabel = new Label("Email Taken");
 
 	private static TextField emailTextField = new TextField();
 
@@ -38,6 +41,8 @@ public class SignUpUI extends StartUI {
 	 */
 	private void setIds() {
 		returnToLoginPageButton.setId("button");
+
+		registrationSuccessLabel.setId("registrationSuccessLabel");
 	}
 
 	/**
@@ -51,6 +56,9 @@ public class SignUpUI extends StartUI {
 		emailLabel.getStyleClass().add("loginSubLabel");
 
 		emailTextField.getStyleClass().add("loginTextField");
+
+		usernameTakenLabel.getStyleClass().add("takenLabels");
+		emailUsedLabel.getStyleClass().add("takenLabels");
 	}
 
 	/**
@@ -170,7 +178,17 @@ public class SignUpUI extends StartUI {
 	 */
 	public static void addRegistrationConfirmationMessage() {
 		// Adds a confirmation message below register button.
-		inputPane.add(centerGridPaneNode(new Label("Registration Successful")), 0, 12);
+		inputPane.add(centerGridPaneNode(registrationSuccessLabel), 0, 12);
+	}
+
+	public static void addUsernameTakenMessage(int rowNum) {
+		// Adds a confirmation message below register button.
+		inputPane.add(centerGridPaneNode(usernameTakenLabel), 0, rowNum);
+	}
+
+	public static void addEmailTakenMessage(int rowNum) {
+		// Adds a confirmation message below register button.
+		inputPane.add(centerGridPaneNode(emailUsedLabel), 0, rowNum);
 	}
 
 }
