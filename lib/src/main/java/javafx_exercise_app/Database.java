@@ -47,6 +47,8 @@ public class Database {
 	}
 
 	/**
+	 * Inserts the new user info into the db if there is no UNIQUE constraint
+	 * violations (Duplication of data that is suppose to be UNIQUE).
 	 * 
 	 * @param userDetails Object containing the users registration details.
 	 * @throws SQLException Throws the exception if the db cannot be connected to
@@ -71,15 +73,18 @@ public class Database {
 			if (typeOfConstraintViolation.contains("users.username")) {
 				System.out.println("Username Already Exists");
 				// Display the error message to the user.
+				SignUpUI.addUsernameTakenMessage(12);
 			}
 
 			if (typeOfConstraintViolation.contains("users.email")) {
-				System.out.println("Email Already Exists");
 				// Display the error message to the user.
+				SignUpUI.addEmailTakenMessage(12);
 				String username = userDetails.getUsername();
+				System.out.println(username);
 				if (hasMatchInColumn(username)) {
-					System.out.println("The username is also not unique");
+					System.out.println("Yo");
 					// Display the error message to the user.
+					SignUpUI.addUsernameTakenMessage(13);
 				}
 
 			}
@@ -91,6 +96,13 @@ public class Database {
 		}
 	}
 
+	/**
+	 * These methods retrieves the username column from the database.
+	 * 
+	 * @return allUsernamesInDatabase An object that provides access to the user
+	 *         name column.
+	 * @throws SQLException Thrown if statement cannot be created correctly.
+	 */
 	private static ResultSet getUsernameColumn() throws SQLException {
 		String usernameColQuery = "SELECT username FROM users";
 		Statement statement = conn.createStatement();
@@ -100,17 +112,27 @@ public class Database {
 			allUsernamesInDatabase = statement.executeQuery(usernameColQuery);
 		} catch (SQLException e) {
 			System.out.println("Query could  not be executed");
+		} finally {
+			statement.close();
 		}
 
 		return allUsernamesInDatabase;
 
 	}
 
+	/**
+	 * Checks if the registration username is already in the db.
+	 * 
+	 * @param username The username being searched for.
+	 * @return matchFound Signifying if the username is already present in the db.
+	 * @throws SQLException Thrown if getUsernameColumn(); throws.
+	 */
 	private static boolean hasMatchInColumn(String username) throws SQLException {
-
+		// Gets the RuleSet representing the username column.
 		ResultSet usernamesInDatabase = getUsernameColumn();
 		boolean matchFound = false;
-
+		System.out.println(usernamesInDatabase.next());
+		// Loops until a match is found or there are no more usernames to check.
 		while (!matchFound && usernamesInDatabase.next()) {
 			String value = usernamesInDatabase.getString("username");
 
