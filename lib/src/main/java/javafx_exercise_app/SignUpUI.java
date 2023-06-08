@@ -1,5 +1,7 @@
 package javafx_exercise_app;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
 import javafx.geometry.Pos;
@@ -88,6 +90,10 @@ public class SignUpUI extends StartUI {
 					Database.insertNewUser(newUser);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
+				} catch (NoSuchAlgorithmException e) {
+					System.out.println("The Hashing Algorithm Used Is Incorrect");
+				} catch (InvalidKeySpecException e) {
+					System.out.println("The keySpec Used Is Incorrect");
 				}
 			}
 			/*
