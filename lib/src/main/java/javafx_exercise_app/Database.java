@@ -1,5 +1,7 @@
 package javafx_exercise_app;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -51,15 +53,19 @@ public class Database {
 	 * violations (Duplication of data that is suppose to be UNIQUE).
 	 * 
 	 * @param userDetails Object containing the users registration details.
-	 * @throws SQLException Throws the exception if the db cannot be connected to
+	 * @throws SQLException             Throws the exception if the db cannot be
+	 *                                  connected to
+	 * @throws InvalidKeySpecException
+	 * @throws NoSuchAlgorithmException
 	 */
-	public static void insertNewUser(RegistrationInfo userDetails) throws SQLException {
+	public static void insertNewUser(RegistrationInfo userDetails)
+			throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
 		connect();
 		// Creates the SQL string and adds the necessary details.
 		String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, userDetails.getUsername());
-		statement.setString(2, userDetails.getPassword());
+		statement.setBytes(2, PasswordHasher.hashPassword(userDetails.getPassword()));
 		statement.setString(3, userDetails.getEmail());
 
 		try {
